@@ -1,5 +1,7 @@
 package com.solution.jpa.dao;
 
+import java.io.Serializable;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -26,6 +28,13 @@ public class GenericDao {
 		em.getTransaction().begin();
 		em.persist(obj);
 		em.getTransaction().commit();
+	}
+
+	public Object findById(Class clz, Serializable id) {
+		EntityManager em = getFactory().createEntityManager();
+		em.getTransaction().begin();
+		return em.find(clz, id);
+		
 	}
 
 	public EntityManagerFactory getFactory() {

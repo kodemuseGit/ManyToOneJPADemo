@@ -9,9 +9,12 @@ import com.solution.jpa.dao.GenericDao;
 import com.solution.jpa.entity.AddressEntity;
 import com.solution.jpa.entity.PersonEntity;
 
+import jdk.nashorn.internal.ir.annotations.Ignore;
+
 public class GenericDaoTest {
 
 	@Test
+	@Ignore
 	public void createEntityManagerFactory() {
 		GenericDao genericDao = GenericDao.getInstance();
 		EntityManagerFactory factory = genericDao.getFactory();
@@ -36,4 +39,12 @@ public class GenericDaoTest {
 		genericDao.persist(address2);
 		System.out.println("Entity Manager >>> " + entityManager);
 	}
+
+	@Test
+	public void findPerson() {
+		GenericDao genericDao = GenericDao.getInstance();
+		PersonEntity person = (PersonEntity) genericDao.findById(PersonEntity.class, 1L);
+		System.out.println("Person >>> " + person);
+	}
+
 }
